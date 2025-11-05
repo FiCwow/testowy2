@@ -75,6 +75,11 @@ class VisionTab(QWidget):
             QMessageBox.warning(self, "Error", "Game window not found. Please load a client first.")
             return
 
+        # Check if the window is minimized
+        if Addresses.win32gui.IsIconic(Addresses.game):
+            self.image_label.setText("Cannot capture view: Game window is minimized.")
+            return
+
         try:
             # Ensure window dimensions are up-to-date before capturing
             Addresses.update_window_dimensions()
